@@ -5,8 +5,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('store/<slug:category_slug>/', views.store, name='product_by_category'),
+    #path('store/<slug:category_slug>/<slug:product_slug>/', views.product_detail, name='product_detail'),
+    path('store/product/<str:slug>/', views.product_detail, name='product-detail'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('product_detail/', views.product_detail, name='product_detail'),
+    
     path('register/', views.register, name='register'),
     path('signin/', views.signin, name='signin'),
     path('store/', views.store, name='store'),
