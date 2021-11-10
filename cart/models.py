@@ -21,6 +21,8 @@ class CartItem(models.Model):
 
     def sub_total(self):
         return self.quantity * self.product.price
+
+    
         
     class Meta:
         verbose_name = ("cartitem")

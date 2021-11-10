@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from . import models
 from store.models import Category
+
 # Create your views here.
 
 
@@ -10,7 +11,7 @@ def index(request):
     return render(request, 'index.html', locals())
 
 
-def store(request, category_slug=None):
+def store(request, category_slug=None,):
     categories = None
     product = None
 
