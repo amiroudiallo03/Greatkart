@@ -8,13 +8,14 @@ class CategoriyAdmin(admin.ModelAdmin):
     list_display = ('category_name', 'picture', 'description')
     search_field = ('category_name',)
     date_hierarchy = 'date_add'
+    list_display_links = ('category_name', 'picture')
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('product_name', 'image_view', 'description', 'price', 'category', 'status')
     search_field = ('product_name',)
     date_hierarchy = 'date_add'
-
+    list_display_links = ('product_name', 'image_view')
     def image_view(self, obj):
 
         return mark_safe(f'<img src="{obj.images.url}" style="width:100px; height:100px">')

@@ -49,9 +49,9 @@ def signin(request):
 
 
 
-def cart(request):
+# def cart(request):
 
-    return render(request, 'cart.html')
+#     return render(request, 'cart.html')
 
 def order_complete(request):
 
@@ -61,3 +61,8 @@ def order_complete(request):
 def place_order(request):
 
     return render(request, 'place-order.html')
+
+
+def cart(request):
+
+    return render(request, 'cart.html')
