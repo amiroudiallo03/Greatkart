@@ -8,6 +8,8 @@ urlpatterns = [
     path('store/<slug:category_slug>/', views.store, name='product_by_category'),
     #path('store/<slug:category_slug>/<slug:product_slug>/', views.product_detail, name='product_detail'),
     path('store/product/<str:slug>/', views.product_detail, name='product-detail'),
+    path('search/', views.search, name='search'),
+
     path('dashboard/', views.dashboard, name='dashboard'),
     
     path('register/', views.register, name='register'),

@@ -91,7 +91,7 @@ $(document).ready(function() {
 	</div> <!-- col.// -->
 	<a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
 	<div class="col-lg  col-md-6 col-sm-12 col">
-		<form action="#" class="search">
+		<form action="{% url 'search' %}" class="search" method='GET' > {% csrf_token %}
 			<div class="input-group w-100">
 			    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
 			    
@@ -114,7 +114,7 @@ $(document).ready(function() {
 					</div>
 					<a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
 						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-						<span class="badge badge-pill badge-danger notify">{{cart_items_count}}</span>
+						<span class="badge badge-pill badge-danger notify">{{count}}</span>
 						
 					</a>
 				</div> <!-- widgets-wrap.// -->

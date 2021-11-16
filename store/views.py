@@ -64,6 +64,8 @@ def place_order(request):
     return render(request, 'place-order.html')
 
 
-def cart(request):
+def search(request):
 
-    return render(request, 'cart.html')
+    return render(request, 'store.html')
+
+

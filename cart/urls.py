@@ -10,5 +10,5 @@ urlpatterns = [
     path('decrement_quantity/<int:product_id>/', decrement_quantity, name='decrement_quantity'),
     path('remove_to_cart/<int:product_id>/', remove_to_cart, name='remove_to_cart'),
     
-
+    
 ]
