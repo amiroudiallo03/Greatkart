@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from . import models
 from store.models import Category
-
+from django.db.models import Q
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -13,17 +14,23 @@ def index(request):
 
 def store(request, category_slug=None,):
     categories = None
-    product = None
+    products = None
 
     if category_slug != None:
         categories = get_object_or_404(Category, slug=category_slug)
         products = models.Product.objects.filter(category=categories, is_availaible=True)
+        paginator = Paginator(products, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         product_count = products.count()
     else:
         products = models.Product.objects.filter(is_availaible=True).all()
+        paginator = Paginator(products, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         product_count = products.count()
-    
-    return render(request, 'store.html', locals())
+
+    return render(request, 'store.html', {'products': page_obj})
 
 
 def product_detail(request, slug):
@@ -65,7 +72,10 @@ def place_order(request):
 
 
 def search(request):
-
-    return render(request, 'store.html')
+    search = request.GET['search']
+    if search:
+        products = models.Product.objects.filter(Q(product_name__icontains=search) | Q(description__icontains=search))
+        product_count = products.count()
+    return render(request, 'store.html', locals())
 
 

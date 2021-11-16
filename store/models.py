@@ -46,4 +46,6 @@ class Product(Base):
     def __str__(self):
         return self.product_name
     
-        
+    def get_url(self):
+
+        return reverse('product-detail', args=[self.slug])
