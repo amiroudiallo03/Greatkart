@@ -18,19 +18,22 @@ def store(request, category_slug=None,):
 
     if category_slug != None:
         categories = get_object_or_404(Category, slug=category_slug)
-        products = models.Product.objects.filter(category=categories, is_availaible=True)
+        products = models.Product.objects.filter(category=categories, is_availaible=True).order_by('id')
         paginator = Paginator(products, 3)
+        product_count = products.count()
+        
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        product_count = products.count()
+        #product_count = products.count()
     else:
         products = models.Product.objects.filter(is_availaible=True).all().order_by('id')
         paginator = Paginator(products, 6)
+        product_count = products.count()
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        product_count = products.count()
+        
 
-    return render(request, 'store.html', {'products': page_obj})
+    return render(request, 'store.html', {'products': page_obj, 'product_count':product_count})
 
 
 def product_detail(request, slug):
@@ -38,6 +41,8 @@ def product_detail(request, slug):
         product = get_object_or_404(models.Product, slug=slug)
     except Exception as e:
         raise e
+    colors = models.Variation.objects.color()
+    sizes = models.Variation.objects.size()
     return render(request, 'product-detail.html', locals())
 
 def dashboard(request):

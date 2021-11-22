@@ -8,16 +8,16 @@ def menu_link(request):
     return dict(links=links)
 
 
-def cart_count(request, count=0):
+def cart_count(request):
+    count=0
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+        cart_items = CartItem.objects.all().filter(cart=cart, is_active=True)
     
-    cart = Cart.objects.get(cart_id=_cart_id(request))
-    cart_items = CartItem.objects.all().filter(cart=cart, is_active=True)
-    
-    for cart_item in cart_items:
+        for cart_item in cart_items:
         
-        count += cart_item.quantity
-
-    
-        
-        
+            count += cart_item.quantity
+    except Cart.DoesNotExist:
+        count=0
+     
     return dict(count=count)

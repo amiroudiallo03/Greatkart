@@ -14,10 +14,11 @@ def _cart_id(request):
 
 
 def add_cart(request, product_id):
+    
     product = get_object_or_404(Product, id=product_id)
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
-    except Cart.DoesNotExist:
+    except Exception:
         cart = Cart.create(cart_id=_cart_id(request))
 
     cart.save
@@ -27,7 +28,7 @@ def add_cart(request, product_id):
         quantity = 1
         cart_item.quantity = quantity
         cart_item.save()
-    except CartItem.DoesNotExist:
+    except Exception:
         cart_item = CartItem(
             product=product,
             cart=cart,
@@ -46,6 +47,8 @@ def cart(request, total=0, quantity=0, cart_items=None):
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
+        tax = 10
+        grand_total = total - tax
     except Exception:
         pass
     return render(request, 'cart.html', locals())

@@ -19,3 +19,8 @@ class ProductAdmin(admin.ModelAdmin):
     def image_view(self, obj):
 
         return mark_safe(f'<img src="{obj.images.url}" style="width:100px; height:100px">')
+@admin.register(models.Variation)
+class VariationAdmin(admin.ModelAdmin):
+    list_display = ('product', 'variation_category','variation_value', 'is_active')
+    list_display_link = ('is_active',)
+    list_filter = ('product', 'variation_category','variation_value')

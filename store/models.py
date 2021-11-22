@@ -49,3 +49,27 @@ class Product(Base):
     def get_url(self):
 
         return reverse('product-detail', args=[self.slug])
+
+
+class VariationManager(models.Manager):
+    def color(self):
+        return super(VariationManager, self).filter(variation_category='color', is_active=True)
+
+    def size(self):
+        return super(VariationManager,self).filter(variation_category='size', is_active=True)
+
+choices_variation_category = {
+    ('color', 'color'),
+    ('size', 'size')
+}
+
+class Variation(Base):
+    product = models.ForeignKey("Product", related_name= 'product_variation', on_delete=models.CASCADE)
+    variation_category = models.CharField(max_length=100, choices=choices_variation_category)
+    variation_value = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+
+    objects = VariationManager()
+    
+    def __unicode__(self):
+        return self.product
