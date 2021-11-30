@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from account.views import register
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -12,7 +13,7 @@ urlpatterns = [
 
     path('dashboard/', views.dashboard, name='dashboard'),
     
-    path('register/', views.register, name='register'),
+    path('register/', register, name='register'),
     path('signin/', views.signin, name='signin'),
     path('store/', views.store, name='store'),
     path('order_complete', views.order_complete, name='order_complete'),

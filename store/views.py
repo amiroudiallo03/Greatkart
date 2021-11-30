@@ -52,9 +52,7 @@ def dashboard(request):
 
 
 
-def register(request):
 
-    return render(request, 'register.html')
 
 def signin(request):
 

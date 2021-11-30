@@ -11,10 +11,15 @@ class Cart(models.Model):
         verbose_name = ("cart")
         verbose_name_plural = ("carts")
 
+    def __str__(self):
+        return self.cart_id
+    
+
 
 
 class CartItem(models.Model):
     product = models.ForeignKey("store.Product", related_name='product_cartitem', on_delete=models.CASCADE)
+    variation = models.ManyToManyField("store.Variation", blank=True)
     cart = models.ForeignKey(Cart, related_name='cart', on_delete=models.CASCADE)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
@@ -28,4 +33,6 @@ class CartItem(models.Model):
         verbose_name = ("cartitem")
         verbose_name_plural = ("cart_items")
 
+    def __unicode__(self):
+        return self.product
     
