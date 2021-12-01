@@ -3,6 +3,7 @@ from . import models
 from store.models import Category
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -45,6 +46,8 @@ def product_detail(request, slug):
     sizes = models.Variation.objects.size()
     return render(request, 'product-detail.html', locals())
 
+    
+@login_required
 def dashboard(request):
 
     return render(request, 'dashboard.html')
@@ -54,9 +57,7 @@ def dashboard(request):
 
 
 
-def signin(request):
 
-    return render(request, 'signin.html')
 
 
 

@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from account.views import register
+from account.views import register, signin, signout
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -14,7 +14,10 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     
     path('register/', register, name='register'),
-    path('signin/', views.signin, name='signin'),
+    path('signin/', signin, name='signin'),
+    path('signout/', signout, name='signout'),
+
+
     path('store/', views.store, name='store'),
     path('order_complete', views.order_complete, name='order_complete'),
     path('place_order/', views.place_order, name='place_order'),
